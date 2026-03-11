@@ -109,6 +109,11 @@ namespace SIT221_Library
         // This method sets Count to 0 and removes all elements from vector without changing its capacity
         public void Clear()
         {
+            // Loop through all the elements in the vector and 
+            for (int i = 0; i < Count; i++)
+            {
+                data[i] = default(T);
+            }
             // Set Count to 0
             Count = 0;
         }
@@ -116,12 +121,7 @@ namespace SIT221_Library
         // This method determines whether a specific T element exists within the data list
         public bool Contains(T element)
         {
-            // Iterate through the list and return true if the specified T element exists, otherwise return false
-            for (int i = 0; i < Count; i++)
-            {
-                if (data[i].Equals(element)) return true;
-            }
-            return false;
+            return (IndexOf(element)) != -1;
         }
 
         // This method removes the first occurrence of the specified element from the data list
@@ -144,7 +144,7 @@ namespace SIT221_Library
             // Throw exception if index value is invalid
             if (index >= Count || index < 0) throw new IndexOutOfRangeException("Index is out of array range");  
             // Shuffle all elements from the index onwards to remove the element
-            for (int i = index; i < Count; i++)
+            for (int i = index; i < Count - 1; i++)
             {
                 data[i] = data[i + 1];
             }
@@ -159,13 +159,12 @@ namespace SIT221_Library
             
             // Create a new empty string to build the list into
             StringBuilder sb = new StringBuilder();
+            sb.Append($"[");
             
             for (int i = 0; i < Count; i++)
             {
                 // Format the list to begin and end with square brackets
-                if (i == 0) 
-                    sb.Append($"[{data[i]},");
-                else if (i == Count - 1) 
+                if (i == Count - 1) 
                     sb.Append($"{data[i]}]");
                 // Display all other elements of the list
                 else
@@ -404,7 +403,7 @@ namespace SIT221_Library
                 vector.Clear();
                 if (!CheckIntSequence(new int[] { }, vector)) throw new Exception("Vector stores incorrect data. It must be empty.");
                 Console.WriteLine(" :: SUCCESS");
-                result = result + "J";
+                result = result + "L";
             }
             catch (Exception exception)
             {
