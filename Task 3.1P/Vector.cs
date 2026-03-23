@@ -212,5 +212,5 @@ namespace SIT221_Library
 					algorithm.Sort(data, 0, Count, comparer);
 			}
 		}
-	}
+    }
 }
