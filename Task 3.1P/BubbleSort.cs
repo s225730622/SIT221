@@ -1,28 +1,30 @@
-// Bubble Sort - Repetitively compares two adjacent elements in the list and exchanging them if they are out of order.
+// ----- Bubble Sort -----
+// Repetitively compares two adjacent elements in the list and exchanging them if they are out of order.
 
 namespace SIT221_Library
 {
     class BubbleSort : ISorter
     {
+        // Implement the Sort method from ISorter
         public void Sort<K>(K[] array, int index, int num, IComparer<K> comparer) where K : IComparable<K>
         {
-            int firstSorted = -1; // Need to change this to 'index'
-            
-            while (firstSorted < num - 1)
+            for (int i = 0; i < num - 1; i++)
             {
-                index = num - 2;
-                while (index > firstSorted)
+                for (int j = index; j < index + num - 1 - i; j++)
                 {
-                    if (comparer.Compare(array[index], array[index + 1]) > 0)
+                    if (comparer.Compare(array[j], array[j + 1]) > 0)
                     {
-                        K temp = array[index + 1];
-                        array[index + 1] = array[index];
-                        array[index] = temp;
+                        // Swaps adjacent elements if required
+                        Swap(array, j, j + 1);
                     }
-                    index--;
                 }
-                firstSorted++;
             }
+        }
+
+        // Swap helper method
+        private void Swap<K>(K[] array, int first, int second)
+        {
+            (array[first], array[second]) = (array[second], array[first]);
         }
     }
 }
