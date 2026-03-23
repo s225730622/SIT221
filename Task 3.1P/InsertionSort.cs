@@ -1,4 +1,5 @@
-// Insertion Sort - The insertion sort removes the need for traversing the entire list by conceptually dividing the list into two: sorted and unsorted. The first element in the unsorted list is then removed to a temporary location, then the elements in the sorted list are shuffled to make a soace available where the unsorted element should be placed. Finally, the previously removed unsorted element is placed in the sorted list. 
+// ----- Insertion Sort -----
+// The insertion sort removes the need for traversing the entire list by conceptually dividing the list into two: sorted and unsorted. 
 
 namespace SIT221_Library
 {
@@ -6,19 +7,18 @@ namespace SIT221_Library
     {
         public void Sort<K>(K[] array, int index, int num, IComparer<K> comparer) where K : IComparable<K>
         {
-            int firstUnsorted = 1;
-
-            while (firstUnsorted < num)
+            for (int i = index + 1; i < index + num; i++)
             {
-                K temp = array[firstUnsorted];
-                index = firstUnsorted - 1;
-                while (index >= 0 && (comparer.Compare(array[index], temp) > 0))
+                K temp = array[i];
+                int j = i - 1;
                 {
-                    array[index + 1] = array[index];
-                    index--;
+                    while (j >= index && (comparer.Compare(array[j], temp) > 0))
+                    {
+                        array[j + 1] = array[j];
+                        j--;
+                    }
                 }
-                array[index + 1] = temp;
-                firstUnsorted++;
+                array[j + 1] = temp;
             }
         }
     }
