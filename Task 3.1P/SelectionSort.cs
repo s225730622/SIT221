@@ -1,4 +1,5 @@
-// Selection Sort - Traverses through the list of unsorted elements to identify the smallest value and then exchanging that element with the first element in the list, moving it straight to its final location (assuming an ascending sort).
+// ----- Selection Sort -----
+// Traverses through the list of unsorted elements to identify the smallest value and then exchanging that element with the first element in the list, moving it straight to its final location (assuming an ascending sort).
 
 namespace SIT221_Library
 {
@@ -6,25 +7,25 @@ namespace SIT221_Library
     {
         public void Sort<K>(K[] array, int index, int num, IComparer<K> comparer) where K : IComparable<K>
         {
-            int firstUnsorted = 0;
-
-            while (firstUnsorted < num - 1)
+            for (int i = index; i < index + num - 1; i++)
             {
-                int smallest = firstUnsorted;
-                index = smallest + 1;
-                while (index < num)
+                int smallest = i;
+
+                for (int j = i + 1; j < index + num; j++)
                 {
-                    if (comparer.Compare(array[index], array[smallest]) < 0)
+                    if (comparer.Compare(array[j], array[smallest]) < 0)
                     {
-                        smallest = index;
+                        smallest = j;
                     }
-                    index++;
                 }
-                K temp = array[smallest];
-                array[smallest] = array[firstUnsorted];
-                array[firstUnsorted] = temp;
-                firstUnsorted++;
+                Swap(array, i, smallest);
             }
+        }
+
+        // Swap helper method
+        private void Swap<K>(K[] array, int first, int second)
+        {
+            (array[first], array[second]) = (array[second], array[first]);
         }
     }
 }
