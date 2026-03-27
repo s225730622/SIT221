@@ -584,7 +584,7 @@ namespace SIT221_Library
             // EXTRA TEST : Sort an array using BubbleSort with the DescendingIntComparer for an int[] array which is empty
             try
             {
-                Console.WriteLine("\nTest Q: Sort integer numbers applying BubbleSort with the DescendingIntComparer when an int[] array is empty: ");
+                Console.WriteLine("\nTest Q: Sort integer numbers applying BubbleSort with the DescendingIntComparer when an int[] array is empty (This should throw a ArgumentNullException): ");
                 // Update the int[] data array which does not need to interact the Vector<T> class
                 data = new int[] { };
                 int range = data.Length;
